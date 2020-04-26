@@ -36,10 +36,10 @@ class CSCManager : BaseManager {
 }
 ```
 ### 連接設備
+建立 manager class 後，執行 connectDevice 便可連線設備並同時完成啟動通知開關動作。由於連線是同步耗時工作，請在 background thread 執行這個 fucntion，connectDevice 會阻塞當前 thread 直到回傳連線結果。
 ```
 CSCManager.connectDevice(device)
 ```
-
 ### 傳送資料到設備
 建立 command
 ```
