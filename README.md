@@ -41,7 +41,25 @@ class CSCManager : BaseManager {
 CSCManager.connectDevice(device)
 ```
 ### 傳送資料到設備
-建立 command
+傳送資料到裝置需要建立 command，在 createCommand(data, verifyResponse, writeCharacteristc) 依序放入
+* data: ByteArray，要傳送的資料
+* verifyResponse: 接收裝置回傳資料的 callback，必須在這裡判斷回傳資料是否正確並回傳 Boolean
+* writeCharacteristic: 裝置開放傳送資料的寫入特徵值
+command.send() 會隨著 verifyResponse 回傳 true 或 false，回傳這次傳送成功或失敗
 ```
+val command = createCommand(
+            commandBytes,
+            { responseBytes ->
+                if (responseBytes[0] == 0xA2.toByte()
+                    && responseBytes[1] == 0x08.toByte()
+                    && responseBytes.size == 20) {
+                    totalRecordCount = responseBytes[3].toInt()
+                    return@createCommand true
+                }
 
+                return@createCommand false
+            },
+            writeCharacteristic
+        )
+command.send()
 ```
