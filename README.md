@@ -50,7 +50,8 @@ command.send() 會隨著 verifyResponse 回傳 true 或 false，回傳這次傳�
 val command = createCommand(
             commandBytes,
             { responseBytes ->
-                if (responseBytes[0] == 0xA2.toByte()
+                // 判斷裝置回傳的資料是否正確
+                if (responseBytes[0] == 0xB2.toByte()
                     && responseBytes[1] == 0x08.toByte()
                     && responseBytes.size == 20) {
                     totalRecordCount = responseBytes[3].toInt()
