@@ -1,0 +1,2 @@
+include ':app', ':bluetooth-library'
+rootProject.name='BLE-Library'
