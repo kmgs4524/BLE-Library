@@ -40,7 +40,7 @@ class CSCManager : BaseManager {
 ```
 CSCManager.connectDevice(device)
 ```
-### 傳送資料到設備
+### 傳送資料與接收資料
 傳送資料到裝置需要建立 command，在 createCommand(data, verifyResponse, writeCharacteristc) 依序放入
 * data: ByteArray，要傳送的資料
 * verifyResponse: 接收裝置回傳資料的 callback，必須在這裡判斷回傳資料是否正確並回傳 Boolean
